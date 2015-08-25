@@ -1,7 +1,7 @@
 var socket = io();
 $('#name').submit(function(){
-  $('#name').hide();
   socket.emit('named user', $('#n').val());
+  $('#name').hide();
   return false;
 });
 $('#text').submit(function(){
@@ -17,4 +17,10 @@ socket.on('connected',function(some){
 });
 socket.on('disconnected',function(some){
   $('#messages').append($('<li>').text(some));
+});
+socket.on('update', function(users){
+	$('#members').empty();
+  for (var user in users){
+  	$('#members').append($('<li>').text(users[user]));
+  }
 });
