@@ -3,6 +3,10 @@ app.controller('ChatController',['$scope' ,function($scope) {
 var connected = false;
 var date = new Date();
 var joe = 0;
+	
+	var parse = function () {
+		
+	};
 
 $('#name').submit(function(){
 	console.log(joe);
@@ -22,7 +26,8 @@ $('#name').submit(function(){
 });
 $('#text').submit(function(){
 	if(connected) {
-		socket.emit('chat message', $('#n').val()+': '+$('#m').val());
+		socket.emit('chat message', {'time': date.toLocaleTimeString(), 'name': $('#n').val(), 'message': $('#m').val()});
+		// socket.emit('chat message', $('#n').val()+': '+$('#m').val());
 		$('#m').val('');
 		return false;
 	} else {
